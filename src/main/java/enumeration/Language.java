@@ -1,6 +1,6 @@
 package enumeration;
 
-enum Language {
+public enum Language {
     German,
     English,
     French,
