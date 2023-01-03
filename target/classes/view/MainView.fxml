@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <BorderPane prefHeight="428.0" prefWidth="671.0">
          <top>
@@ -65,7 +65,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <ChoiceBox prefHeight="24.0" prefWidth="127.0">
+                                                <ChoiceBox fx:id="choiceBoxLanguage" prefHeight="24.0" prefWidth="127.0">
                                                    <GridPane.margin>
                                                       <Insets left="16.0" />
                                                    </GridPane.margin>
