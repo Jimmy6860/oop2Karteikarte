@@ -1,1 +1,6 @@
+model/Card.class
+model/CardsStack.class
 App.class
+enumeration/Language.class
+interfaces/Deck.class
+controller/Controller.class
