@@ -23,27 +23,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <BorderPane prefHeight="428.0" prefWidth="671.0">
-         <top>
-            <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </top>
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
@@ -60,17 +39,18 @@
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                             </columnConstraints>
                                             <rowConstraints>
+                                              <RowConstraints />
                                               <RowConstraints maxHeight="118.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                               <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="246.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <ChoiceBox fx:id="choiceBoxLanguage" prefHeight="24.0" prefWidth="127.0">
+                                                <ChoiceBox fx:id="choiceBoxLanguage" prefHeight="24.0" prefWidth="127.0" GridPane.rowIndex="1">
                                                    <GridPane.margin>
                                                       <Insets left="16.0" />
                                                    </GridPane.margin>
                                                 </ChoiceBox>
-                                                <GridPane GridPane.rowIndex="1">
+                                                <GridPane GridPane.rowIndex="2">
                                                   <columnConstraints>
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
@@ -79,7 +59,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <TextField alignment="CENTER" prefHeight="70.0" prefWidth="433.0" promptText="Deutsch">
+                                                      <TextField fx:id="germanTxtField" alignment="CENTER" prefHeight="70.0" prefWidth="433.0" promptText="Deutsch">
                                                          <padding>
                                                             <Insets left="16.0" right="16.0" />
                                                          </padding>
@@ -90,7 +70,7 @@
                                                             <Font name="System Bold" size="28.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField alignment="CENTER" prefHeight="72.0" prefWidth="433.0" promptText="Fremdwort" GridPane.rowIndex="1">
+                                                      <TextField fx:id="foreignTxtField" alignment="CENTER" prefHeight="72.0" prefWidth="433.0" promptText="Fremdwort" GridPane.rowIndex="1">
                                                          <GridPane.margin>
                                                             <Insets left="16.0" right="16.0" />
                                                          </GridPane.margin>
@@ -103,7 +83,7 @@
                                                       </TextField>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane GridPane.rowIndex="2">
+                                                <GridPane GridPane.rowIndex="3">
                                                   <columnConstraints>
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -117,13 +97,32 @@
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>
                                                       </Button>
-                                                      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" text="Hinzufügen" GridPane.columnIndex="1">
+                                                      <Button mnemonicParsing="false" onAction="#addNewCard" prefHeight="26.0" prefWidth="238.0" text="Hinzufügen" GridPane.columnIndex="1">
                                                          <GridPane.margin>
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>
                                                       </Button>
                                                    </children>
                                                 </GridPane>
+                                                <MenuBar>
+                                                  <menus>
+                                                    <Menu mnemonicParsing="false" text="File">
+                                                      <items>
+                                                        <MenuItem mnemonicParsing="false" text="Close" />
+                                                      </items>
+                                                    </Menu>
+                                                    <Menu mnemonicParsing="false" text="Edit">
+                                                      <items>
+                                                        <MenuItem mnemonicParsing="false" text="Delete" />
+                                                      </items>
+                                                    </Menu>
+                                                    <Menu mnemonicParsing="false" text="Help">
+                                                      <items>
+                                                        <MenuItem mnemonicParsing="false" text="About" />
+                                                      </items>
+                                                    </Menu>
+                                                  </menus>
+                                                </MenuBar>
                                              </children>
                                           </GridPane>
                                        </children>

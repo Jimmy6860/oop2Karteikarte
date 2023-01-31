@@ -1,13 +1,16 @@
 package model;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 
 import interfaces.Deck;
 
 public class Card implements Deck {
 
-    private StringProperty id;
+    private String id;
     private StringProperty word;
 	private StringProperty foreignWord;
 	private BooleanProperty learned;
@@ -15,43 +18,58 @@ public class Card implements Deck {
     public Card() {
     }
 
-    public Card(StringProperty id, StringProperty word, StringProperty foreignWord, BooleanProperty learned) {
+    public Card(String id, String word, String foreignWord, Boolean learned) {
         this.id = id;
-        this.word = word;
-        this.foreignWord = foreignWord;
-        this.learned = learned;
+        this.word = new SimpleStringProperty(word);
+        this.foreignWord = new SimpleStringProperty(foreignWord);
+        this.learned = new SimpleBooleanProperty(learned);
     }
 
-    public StringProperty getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(StringProperty id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public StringProperty getWord() {
-        return this.word;
+    //Word
+    public String getWord() {
+        return word.get();
     }
 
-    public void setWord(StringProperty word) {
-        this.word = word;
+    public void setWord(String word) {
+        this.word.set(word);
     }
 
-    public StringProperty getForeignWord() {
-        return this.foreignWord;
+	public StringProperty wordProperty() {
+		return word;
+	}
+
+    //Foreign word
+    public String getForeignWord() {
+        return foreignWord.get();
     }
 
-    public void setForeignWord(StringProperty foreignWord) {
-        this.foreignWord = foreignWord;
+    public void setForeignWord(String foreignWord) {
+        this.foreignWord.set(foreignWord);
     }
 
-    public BooleanProperty getLearned() {
-        return this.learned;
+    public StringProperty foreignWordProperty() {
+		return foreignWord;
+	}
+
+    //Gelernd
+    public boolean getLearned() {
+        return learned.get();
     }
 
-    public void setLearned(BooleanProperty learned) {
-        this.learned = learned;
+    public void setLearned(boolean learned) {
+        this.learned.set(learned);
+    }
+
+    public BooleanProperty learnedProperty() {
+        return learned;
     }
 
     @Override
