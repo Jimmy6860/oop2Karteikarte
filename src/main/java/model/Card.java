@@ -5,24 +5,28 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.UUID;
 
 import interfaces.Deck;
 
 public class Card implements Deck {
+    UUID uuid = UUID.randomUUID();
+    String uuidAsString = uuid.toString();
 
     private String id;
     private StringProperty word;
 	private StringProperty foreignWord;
-	private BooleanProperty learned;
+	private boolean learned;
 
     public Card() {
+        this(null, null, null, null);
     }
 
     public Card(String id, String word, String foreignWord, Boolean learned) {
-        this.id = id;
+        this.id = uuidAsString;
         this.word = new SimpleStringProperty(word);
         this.foreignWord = new SimpleStringProperty(foreignWord);
-        this.learned = new SimpleBooleanProperty(learned);
+        this.learned = false;
     }
 
     public String getId() {
@@ -59,18 +63,18 @@ public class Card implements Deck {
 		return foreignWord;
 	}
 
-    //Gelernd
+    //Gelernt
     public boolean getLearned() {
-        return learned.get();
+        return this.learned;
     }
 
     public void setLearned(boolean learned) {
-        this.learned.set(learned);
+        this.learned = learned;
     }
 
-    public BooleanProperty learnedProperty() {
-        return learned;
-    }
+    // public BooleanProperty learnedProperty() {
+    //     return learned;
+    // }
 
     @Override
     public String toString() {

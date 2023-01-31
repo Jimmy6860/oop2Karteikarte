@@ -127,9 +127,9 @@
                                           </GridPane>
                                        </children>
                                     </VBox>
-                                    <TableView prefHeight="377.0" prefWidth="238.0">
+                                    <TableView fx:id="cardTable" prefHeight="377.0" prefWidth="238.0">
                                        <columns>
-                                          <TableColumn prefWidth="237.0" text="Karteikarten " />
+                                          <TableColumn fx:id="cardColumn" prefWidth="237.0" text="Karteikarten " />
                                        </columns>
                                     </TableView>
                                  </children>
