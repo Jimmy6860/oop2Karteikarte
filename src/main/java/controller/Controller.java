@@ -42,6 +42,12 @@ public class Controller implements Initializable {
         // Set all card values to the table
         cardTable.setItems(cardList);
         cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
+
+        // Default card details value
+        showCardDetails(null);
+
+        // Event listener, check which card the user select and set the card details values
+        cardTable.getSelectionModel().selectedItemProperty().addListener((observale, oldvalue, newValue) -> showCardDetails(newValue));
         
         choiceBoxLanguage.getItems().addAll(languages);
         choiceBoxLanguage.setOnAction(this::getLanguages);
@@ -60,12 +66,15 @@ public class Controller implements Initializable {
         System.out.println(myLanguage);
     }
 
-    // @FXML
-    // private void initialize() {
-
-    //     System.out.println("Initialize");
-   
-    // }
+    public void showCardDetails(Card card) {
+        if(card != null) {
+            germanTxtField.setText(card.getWord());
+            foreignTxtField.setText(card.getForeignWord());
+        } else {
+            germanTxtField.setText("");
+            foreignTxtField.setText("");
+        }
+    }
 
     @FXML
     public void addNewCard() {
