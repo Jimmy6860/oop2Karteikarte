@@ -92,7 +92,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" text="Löschen">
+                                                      <Button mnemonicParsing="false" onAction="#deleteCard" prefHeight="26.0" prefWidth="238.0" text="Löschen">
                                                          <GridPane.margin>
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>

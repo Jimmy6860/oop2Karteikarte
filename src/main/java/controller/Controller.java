@@ -87,4 +87,18 @@ public class Controller implements Initializable {
        
         cardTable.getItems().add(newCard);
     }
+
+    @FXML
+    public void deleteCard() {
+        int selectedIndex = cardTable.getSelectionModel().getSelectedIndex();
+        cardTable.getItems().remove(selectedIndex);
+        clearCardDetails();
+
+    }
+
+    @FXML
+    public void clearCardDetails() {
+        germanTxtField.setText("");
+        foreignTxtField.setText("");
+    }
 }
