@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -89,20 +90,36 @@
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Button mnemonicParsing="false" onAction="#deleteCard" prefHeight="26.0" prefWidth="238.0" text="Löschen">
+                                                      <Button mnemonicParsing="false" onAction="#deleteCard" prefHeight="26.0" prefWidth="238.0" text="Löschen" GridPane.rowIndex="3">
                                                          <GridPane.margin>
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>
                                                       </Button>
-                                                      <Button mnemonicParsing="false" onAction="#addNewCard" prefHeight="26.0" prefWidth="238.0" text="Hinzufügen" GridPane.columnIndex="1">
+                                                      <Button mnemonicParsing="false" onAction="#addNewCard" prefHeight="26.0" prefWidth="238.0" text="Hinzufügen" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                          <GridPane.margin>
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>
                                                       </Button>
+                                                      <Label fx:id="systemLabelRight" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="220.0" textAlignment="CENTER" textFill="#10e52d" GridPane.columnIndex="1">
+                                                         <opaqueInsets>
+                                                            <Insets left="17.0" />
+                                                         </opaqueInsets>
+                                                      </Label>
+                                                      <Label fx:id="systemLabelLeft" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="220.0" textAlignment="CENTER" textFill="#e81010">
+                                                         <opaqueInsets>
+                                                            <Insets left="17.0" />
+                                                         </opaqueInsets>
+                                                      </Label>
                                                    </children>
+                                                   <opaqueInsets>
+                                                      <Insets left="8.0" />
+                                                   </opaqueInsets>
                                                 </GridPane>
                                                 <MenuBar>
                                                   <menus>
@@ -123,6 +140,11 @@
                                                     </Menu>
                                                   </menus>
                                                 </MenuBar>
+                                                <Label fx:id="systemLabelLeft1" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="220.0" textAlignment="CENTER" textFill="#e81010">
+                                                   <opaqueInsets>
+                                                      <Insets left="17.0" />
+                                                   </opaqueInsets>
+                                                </Label>
                                              </children>
                                           </GridPane>
                                        </children>
