@@ -1,13 +1,13 @@
 package controller;
 
 import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import enumeration.Language;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -28,9 +28,15 @@ import model.CardsStack;
 
 public class Controller implements Initializable {
     private static ObservableList<Card> cardList;
-    private List<Card> list = new ArrayList<>();
-    private CardsStack englishStack = new CardsStack();
+    private List<Card> englishlist = new ArrayList<>();
+    private List<Card> frenchlist = new ArrayList<>();
+    private List<Card> italianlist = new ArrayList<>();
+    private CardsStack englishStack = new CardsStack("1", "EnglishStack", englishlist, Language.English);
+    private CardsStack frenchStack = new CardsStack("2", "FrenchStack", frenchlist, Language.French);
+    private CardsStack italianStack = new CardsStack("3", "ItalianStack", italianlist, Language.Italian);
     private String[] languages= {"Englisch", "Französich", "Italienisch" };
+    private List<Card> currentList = englishStack.getCards();
+    private String currentLanguage = "Englisch";
 
     @FXML
     private TextField germanTxtField;
@@ -67,15 +73,38 @@ public class Controller implements Initializable {
 
     // set initialize tasks data
     private ObservableList<Card> getInitialTableData() {
+        //currentList = englishStack.getCards();
 
-        ObservableList<Card> observableList = FXCollections.observableList(list);
+
+        ObservableList<Card> observableList = FXCollections.observableList(currentList);
 
         return observableList;
     }
 
     public void getLanguages(ActionEvent event) {
-        String myLanguage = choiceBoxLanguage.getValue();
-        System.out.println(myLanguage);
+        String currentLanguage = choiceBoxLanguage.getValue();
+
+        switch (currentLanguage) {
+            case "Englisch":
+                currentList = englishStack.getCards();
+                break;
+            case "Französich":
+                currentList = frenchStack.getCards();
+                break;
+            case "Italienisch":
+                currentList = italianStack.getCards();
+                break;
+            default:
+                currentList = englishStack.getCards();
+                break;
+        }
+
+        System.out.println(currentLanguage);
+        cardList = getInitialTableData();
+
+        // Set all card values to the table
+        cardTable.setItems(cardList);
+        cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
     }
 
     public void showCardDetails(Card card) {

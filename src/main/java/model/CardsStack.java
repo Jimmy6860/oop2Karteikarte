@@ -8,15 +8,15 @@ import enumeration.*;
 
 public class CardsStack implements Deck {
 
-    private StringProperty id;
-    private StringProperty name;
+    private String id;
+    private String name;
     private List<Card> cards;
     private Language language;
 
     public CardsStack() {
     }
 
-    public CardsStack(StringProperty id, StringProperty name, List<Card> cards, Language language) {
+    public CardsStack(String id, String name, List<Card> cards, Language language) {
         this.id = id;
         this.name = name;
         this.cards = cards;
@@ -31,19 +31,19 @@ public class CardsStack implements Deck {
         this.language = language;
     }
 
-    public StringProperty getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(StringProperty id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public StringProperty getName() {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(StringProperty name) {
+    public void setName(String name) {
         this.name = name;
     }
 
