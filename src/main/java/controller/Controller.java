@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.text.Text;
 import model.Card;
 import model.CardsStack;
 
@@ -36,7 +37,6 @@ public class Controller implements Initializable {
     private CardsStack italianStack = new CardsStack("3", "ItalianStack", italianlist, Language.Italian);
     private String[] languages= {"Englisch", "Französich", "Italienisch" };
     private List<Card> currentList = englishStack.getCards();
-    private String currentLanguage = "Englisch";
 
     @FXML
     private TextField germanTxtField;
@@ -52,14 +52,13 @@ public class Controller implements Initializable {
     private Label systemLabelRight;
     @FXML
     private Label systemLabelLeft;
+    @FXML
+    private Text learnSectionTitle;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        cardList = getInitialTableData();
-
-        // Set all card values to the table
-        cardTable.setItems(cardList);
-        cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
+        
+        setTableData();
 
         // Default card details value
         showCardDetails(null);
@@ -69,16 +68,22 @@ public class Controller implements Initializable {
         
         choiceBoxLanguage.getItems().addAll(languages);
         choiceBoxLanguage.setOnAction(this::getLanguages);
+        learnSectionTitle.setText("Englisch");
     }
 
     // set initialize tasks data
     private ObservableList<Card> getInitialTableData() {
-        //currentList = englishStack.getCards();
-
 
         ObservableList<Card> observableList = FXCollections.observableList(currentList);
 
         return observableList;
+    }
+
+    private void setTableData() {
+        cardList = getInitialTableData();
+        // Set all card values to the table
+        cardTable.setItems(cardList);
+        cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
     }
 
     public void getLanguages(ActionEvent event) {
@@ -98,13 +103,9 @@ public class Controller implements Initializable {
                 currentList = englishStack.getCards();
                 break;
         }
+        learnSectionTitle.setText(currentLanguage);
+        setTableData();
 
-        System.out.println(currentLanguage);
-        cardList = getInitialTableData();
-
-        // Set all card values to the table
-        cardTable.setItems(cardList);
-        cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
     }
 
     public void showCardDetails(Card card) {
@@ -136,22 +137,39 @@ public class Controller implements Initializable {
         return false;
     }
 
+    public void resetCardTextField() {
+        germanTxtField.setText("");
+        foreignTxtField.setText("");
+    }
+
+    public void setSystemLabelRight(String txt) {
+        systemLabelRight.setText(txt);
+        Timeline timeline = new Timeline(new KeyFrame(
+        Duration.millis(3000),
+        ae -> systemLabelRight.setText("")));
+        timeline.play();
+    }
+
     @FXML
     public void addNewCard() {
-        Card newCard = new Card();
+        
         if(isInputValid()){
-            newCard.setWord(germanTxtField.getText());
-            newCard.setForeignWord(foreignTxtField.getText());
-            newCard.setLearned(false);
-            System.out.println(newCard);
-            System.out.println(newCard.getId());
-           
-            systemLabelRight.setText("Karteikarte gespeichert");
-            Timeline timeline = new Timeline(new KeyFrame(
-            Duration.millis(3000),
-            ae -> systemLabelRight.setText("")));
-            timeline.play();
-            cardTable.getItems().add(newCard);
+            Card selectedTask = cardTable.getSelectionModel().getSelectedItem();
+            if(selectedTask != null) {
+                selectedTask.setWord(germanTxtField.getText());
+                selectedTask.setForeignWord(foreignTxtField.getText());
+                setSystemLabelRight("Karteikarte angepasst");
+            } else {
+                Card newCard = new Card();
+                newCard.setWord(germanTxtField.getText());
+                newCard.setForeignWord(foreignTxtField.getText());
+                newCard.setLearned(false);
+                System.out.println(newCard);
+                System.out.println(newCard.getId());
+                setSystemLabelRight("Karteikarte gespeichert");
+                cardTable.getItems().add(newCard);
+                resetCardTextField();
+            }
         }
     }
 
