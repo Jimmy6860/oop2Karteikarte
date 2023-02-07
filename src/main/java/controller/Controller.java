@@ -219,7 +219,10 @@ public class Controller implements Initializable {
         foreignTxtField.setText("");
     }
 
-    // Learning Section
+    /*******************
+    * Learning Section *
+    ********************/
+
     public Card getCurrentCard() {
         Card currentCard = currentList.get(currentIndex);
         return currentCard;
@@ -275,4 +278,8 @@ public class Controller implements Initializable {
         lnForeignTxt.setText("");
         currentIndex = 0;
     }
+
+    /************************
+    * File handling section *
+    *************************/
 }

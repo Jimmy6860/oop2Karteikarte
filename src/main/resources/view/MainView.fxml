@@ -126,7 +126,7 @@
                                                   <menus>
                                                     <Menu mnemonicParsing="false" text="File">
                                                       <items>
-                                                        <MenuItem mnemonicParsing="false" text="Close" />
+                                                        <MenuItem mnemonicParsing="false" onAction="#saveAllData" text="Karteikarte speichern" />
                                                       </items>
                                                     </Menu>
                                                     <Menu mnemonicParsing="false" text="Edit">
@@ -141,11 +141,6 @@
                                                     </Menu>
                                                   </menus>
                                                 </MenuBar>
-                                                <Label fx:id="systemLabelLeft1" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="220.0" textAlignment="CENTER" textFill="#e81010">
-                                                   <opaqueInsets>
-                                                      <Insets left="17.0" />
-                                                   </opaqueInsets>
-                                                </Label>
                                              </children>
                                           </GridPane>
                                        </children>
