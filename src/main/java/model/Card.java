@@ -77,6 +77,7 @@ public class Card implements Deck {
     @Override
     public String toString() {
         return "{" +
+            " id='" + getId() + "'" +
             " word='" + getWord() + "'" +
             ", foreignWord='" + getForeignWord() + "'" +
             ", learned='" + getLearned() + "'" +

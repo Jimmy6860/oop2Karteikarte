@@ -188,7 +188,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <TextField alignment="CENTER" prefHeight="70.0" prefWidth="433.0" promptText="Deutsch">
+                                                      <TextField fx:id="lnGermanTxt" alignment="CENTER" prefHeight="70.0" prefWidth="433.0" promptText="Deutsch">
                                                          <padding>
                                                             <Insets left="16.0" right="16.0" />
                                                          </padding>
@@ -199,7 +199,7 @@
                                                             <Font name="System Bold" size="28.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField alignment="CENTER" prefHeight="72.0" prefWidth="433.0" promptText="Fremdwort" GridPane.rowIndex="1">
+                                                      <TextField fx:id="lnForeignTxt" alignment="CENTER" prefHeight="72.0" prefWidth="433.0" promptText="Fremdwort" GridPane.rowIndex="1">
                                                          <GridPane.margin>
                                                             <Insets left="16.0" right="16.0" />
                                                          </GridPane.margin>
@@ -221,7 +221,12 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" text="Anzeigen" GridPane.columnIndex="1">
+                                                      <Button mnemonicParsing="false" onAction="#showForeignWord" prefHeight="26.0" prefWidth="238.0" text="Anzeigen" GridPane.columnIndex="1">
+                                                         <GridPane.margin>
+                                                            <Insets left="24.0" right="24.0" />
+                                                         </GridPane.margin>
+                                                      </Button>
+                                                      <Button mnemonicParsing="false" onAction="#startLearning" prefHeight="26.0" prefWidth="238.0" text="Lernen">
                                                          <GridPane.margin>
                                                             <Insets left="24.0" right="24.0" />
                                                          </GridPane.margin>

@@ -43,6 +43,10 @@ public class Controller implements Initializable {
     @FXML
     private TextField foreignTxtField;
     @FXML
+    private TextField lnGermanTxt;
+    @FXML
+    private TextField lnForeignTxt;
+    @FXML
     private ChoiceBox<String> choiceBoxLanguage;
     @FXML
     private TableView<Card> cardTable;
@@ -211,5 +215,19 @@ public class Controller implements Initializable {
     public void clearCardDetails() {
         germanTxtField.setText("");
         foreignTxtField.setText("");
+    }
+
+    // Learning Section
+    public void startLearning() {
+        Card currentCard = currentList.get(0);
+        lnGermanTxt.setText(currentCard.getWord());
+        for (Card card : cardList) {
+            System.out.println(card.toString());
+        }
+    }
+
+    public void showForeignWord() {
+        Card currentCard = currentList.get(0);
+        lnForeignTxt.setText(currentCard.getForeignWord());
     }
 }
