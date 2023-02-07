@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Service.FileAccess;
 import enumeration.Language;
@@ -167,10 +172,7 @@ public class Controller implements Initializable {
                 selectedTask.setForeignWord(foreignTxtField.getText());
                 setSystemLabelRight("Karteikarte angepasst");
             } else {
-                Card newCard = new Card();
-                newCard.setWord(germanTxtField.getText());
-                newCard.setForeignWord(foreignTxtField.getText());
-                newCard.setLearned(false);
+                Card newCard = new Card("", germanTxtField.getText(), foreignTxtField.getText(), false);
                 System.out.println(newCard);
                 System.out.println(newCard.getId());
                 setSystemLabelRight("Karteikarte gespeichert");
@@ -286,7 +288,7 @@ public class Controller implements Initializable {
 
     public void saveFile() {
         try {
-			FileAccess.saveFile("data.text", englishStack.getCards().toString());
+            FileAccess.saveFile("data.txt", englishStack.getCards().toString());
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Exception: " + e.getClass().getName());
@@ -301,10 +303,31 @@ public class Controller implements Initializable {
 		try {
 			String content = FileAccess.readFile("data.txt");
             String[] convertedData = content.split(" ");
-            for (String card : convertedData) {
+
+  
+
+            for (int i = 0; i < convertedData.length; i++) {
+
+                Pattern pattern = Pattern.compile("id='(.*?)' word='(.*?)' foreignWord='(.*?)' learned='(.*?)'");
+                Matcher matcher = pattern.matcher(convertedData[i]);
+                System.out.println("index:" + i);
+                System.out.println(convertedData[i]);
+                System.out.println(matcher.find());
+                if (matcher.find()) {
+                    String id = matcher.group(1);
+                    String word = matcher.group(2);
+                    String foreignWord = matcher.group(3);
+                    Boolean learned = matcher.group(4) != "false";
+                    Card loadedCard =  new Card(id, word, foreignWord, learned);
+                    englishlist.add(loadedCard);
+
+
+            System.out.println("id: " + id);
+            System.out.println("word: " + word);
+            System.out.println("foreignWord: " + foreignWord);
+            System.out.println("learned: " + learned);
+                }
             }
-            // englishlist = content;
-			System.out.println(content);
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Exception: " + e.getClass().getName());

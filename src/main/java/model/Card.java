@@ -21,10 +21,10 @@ public class Card implements Deck {
     }
 
     public Card(String id, String word, String foreignWord, Boolean learned) {
-        this.id = uuidAsString;
+        this.id = id.length() == 0 ? uuidAsString : id;
         this.word = new SimpleStringProperty(word);
         this.foreignWord = new SimpleStringProperty(foreignWord);
-        this.learned = false;
+        this.learned = learned;
     }
 
     public String getId() {
@@ -77,10 +77,10 @@ public class Card implements Deck {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            " word='" + getWord() + "'" +
-            ", foreignWord='" + getForeignWord() + "'" +
-            ", learned='" + getLearned() + "'" +
+            "'" + getId() + "'" +
+            ", '" + getWord() + "'" +
+            ", '" + getForeignWord() + "'" +
+            ", '" + getLearned() + "'" +
             "}";
     }
 
