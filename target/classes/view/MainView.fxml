@@ -257,8 +257,8 @@
                                           <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Zurück" GridPane.rowIndex="1" />
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Weiter" />
+                                          <Button mnemonicParsing="false" onAction="#previousCard" prefHeight="26.0" prefWidth="108.0" text="Zurück" GridPane.rowIndex="1" />
+                                          <Button mnemonicParsing="false" onAction="#nextCard" prefHeight="26.0" prefWidth="106.0" text="Weiter" />
                                        </children>
                                        <padding>
                                           <Insets left="16.0" right="16.0" />

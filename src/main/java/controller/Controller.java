@@ -37,6 +37,7 @@ public class Controller implements Initializable {
     private CardsStack italianStack = new CardsStack("3", "ItalianStack", italianlist, Language.Italian);
     private String[] languages= {"Englisch", "Französich", "Italienisch" };
     private List<Card> currentList = englishStack.getCards();
+    private Integer currentIndex = 0;
 
     @FXML
     private TextField germanTxtField;
@@ -109,6 +110,7 @@ public class Controller implements Initializable {
         }
         learnSectionTitle.setText(currentLanguage);
         setTableData();
+        resetLearningSession();
 
     }
 
@@ -218,16 +220,59 @@ public class Controller implements Initializable {
     }
 
     // Learning Section
+    public Card getCurrentCard() {
+        Card currentCard = currentList.get(currentIndex);
+        return currentCard;
+    }
+
     public void startLearning() {
-        Card currentCard = currentList.get(0);
-        lnGermanTxt.setText(currentCard.getWord());
+        
+        lnGermanTxt.setText(getCurrentCard().getWord());
+        lnForeignTxt.setText("");
         for (Card card : cardList) {
             System.out.println(card.toString());
         }
     }
 
     public void showForeignWord() {
-        Card currentCard = currentList.get(0);
-        lnForeignTxt.setText(currentCard.getForeignWord());
+        lnForeignTxt.setText(getCurrentCard().getForeignWord());
+    }
+
+    public void nextCard() {
+        if(currentIndex < (currentList.size() - 1)) {
+            currentIndex++;
+            System.out.println("currentIndex: " + currentIndex);
+            System.out.println("currentList" + currentList.size());
+            
+            startLearning();
+        } else {
+            Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Ende");
+            confirmationAlert.setContentText("Möchten Sie nochmals lernen?");
+            ButtonType okButton = new ButtonType("JA");
+            ButtonType noButton = new ButtonType("NEIN");
+            confirmationAlert.getButtonTypes().setAll(okButton, noButton);
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+            if(result.get() == okButton) {
+                resetLearningSession();
+                startLearning();
+            } else if(result.get() == noButton) {
+                resetLearningSession();
+            }
+        }
+
+    }
+
+    public void previousCard() {
+        if(currentIndex != 0) {
+            currentIndex--;
+            startLearning();
+        }
+    }
+
+    public void resetLearningSession() {
+        lnGermanTxt.setText("");
+        lnForeignTxt.setText("");
+        currentIndex = 0;
     }
 }
