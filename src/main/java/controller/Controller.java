@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Service.FileAccess;
 import enumeration.Language;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -62,7 +63,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        
+        loadFile();
         setTableData();
 
         // Default card details value
@@ -282,4 +283,35 @@ public class Controller implements Initializable {
     /************************
     * File handling section *
     *************************/
+
+    public void saveFile() {
+        try {
+			FileAccess.saveFile("data.text", englishStack.getCards().toString());
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Exception: " + e.getClass().getName());
+			alert.setHeaderText(null);
+			alert.setContentText("Error-Message: " + e.getMessage());
+			alert.showAndWait();
+		}
+    }
+
+    @FXML
+	private void loadFile() {
+		try {
+			String content = FileAccess.readFile("data.txt");
+            String[] convertedData = content.split(" ");
+            for (String card : convertedData) {
+            }
+            // englishlist = content;
+			System.out.println(content);
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Exception: " + e.getClass().getName());
+			alert.setHeaderText(null);
+			alert.setContentText("Error-Message: " + e.getMessage());
+			alert.showAndWait();
+		}
+		
+	}
 }

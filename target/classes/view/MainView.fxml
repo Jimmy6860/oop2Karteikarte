@@ -126,7 +126,7 @@
                                                   <menus>
                                                     <Menu mnemonicParsing="false" text="File">
                                                       <items>
-                                                        <MenuItem mnemonicParsing="false" onAction="#saveAllData" text="Karteikarte speichern" />
+                                                        <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Daten speichern" />
                                                       </items>
                                                     </Menu>
                                                     <Menu mnemonicParsing="false" text="Edit">
