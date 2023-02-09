@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import Service.FileAccess;
 import enumeration.Language;
@@ -301,40 +302,88 @@ public class Controller implements Initializable {
     @FXML
 	private void loadFile() {
 		try {
-			String content = FileAccess.readFile("data.txt");
-            String[] convertedData = content.split(" ");
+            // Sie müssen eine Klasse erstellen, die dem JSON-Format entspricht
 
-  
+            String json = "[{\"id\":\"5f550865-e9de-49ec-bdad-ca3e541cee6b\",\"word\":\"Test\",\"foreignWord\":\"23\",\"learned\":false},{\"id\":\"b8d38377-4624-4767-83d8-593f8906d706\",\"word\":\"nue\",\"foreignWord\":\"fe\",\"learned\":false}]";
 
-            for (int i = 0; i < convertedData.length; i++) {
-
-                Pattern pattern = Pattern.compile("id='(.*?)' word='(.*?)' foreignWord='(.*?)' learned='(.*?)'");
-                Matcher matcher = pattern.matcher(convertedData[i]);
-                System.out.println("index:" + i);
-                System.out.println(convertedData[i]);
-                System.out.println(matcher.find());
-                if (matcher.find()) {
-                    String id = matcher.group(1);
-                    String word = matcher.group(2);
-                    String foreignWord = matcher.group(3);
-                    Boolean learned = matcher.group(4) != "false";
-                    Card loadedCard =  new Card(id, word, foreignWord, learned);
-                    englishlist.add(loadedCard);
-
-
-            System.out.println("id: " + id);
-            System.out.println("word: " + word);
-            System.out.println("foreignWord: " + foreignWord);
-            System.out.println("learned: " + learned);
-                }
+            ObjectMapper mapper = new ObjectMapper();
+            
+            // Sie müssen eine Klasse erstellen, die dem JSON-Format entspricht
+            
+            Word[] words = mapper.readValue(json, Word[].class);
+            
+            for (Word w : words) {
+              System.out.println(w.id + " " + w.word + " " + w.foreignWord + " " + w.learned);
             }
+
+			// String content = FileAccess.readFile("data.txt");
+            // Gson gson = new Gson();
+            // class Card {
+            //     String id;
+            //     String word;
+            //     String foreignWord;
+            //     boolean learned;
+            //   }
+              
+            // Card[] cards = gson.fromJson(content, Card[].class);
+            // System.out.println(cards[0].id);
+            // // System.out.println("convertedData " + content);
+            // // for (Card w : cards) {
+            // //     System.out.println(w.id + " " + w.word + " " + w.foreignWord + " " + w.learned);
+            // //   }
+
 		} catch (Exception e) {
+            System.out.println(e.getMessage());
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Exception: " + e.getClass().getName());
 			alert.setHeaderText(null);
 			alert.setContentText("Error-Message: " + e.getMessage());
 			alert.showAndWait();
+            
 		}
 		
 	}
 }
+
+class Word {
+    String id;
+    String word;
+    String foreignWord;
+    boolean learned;
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getWord() {
+        return this.word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getForeignWord() {
+        return this.foreignWord;
+    }
+
+    public void setForeignWord(String foreignWord) {
+        this.foreignWord = foreignWord;
+    }
+
+    public boolean isLearned() {
+        return this.learned;
+    }
+
+    public boolean getLearned() {
+        return this.learned;
+    }
+
+    public void setLearned(boolean learned) {
+        this.learned = learned;
+    }
+  }

@@ -1,6 +1,7 @@
 model/Card.class
 Service/FileAccess.class
 model/CardsStack.class
+controller/Word.class
 model/FileInfo.class
 App.class
 enumeration/Language.class
