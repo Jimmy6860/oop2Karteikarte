@@ -302,35 +302,16 @@ public class Controller implements Initializable {
     @FXML
 	private void loadFile() {
 		try {
-            // Sie müssen eine Klasse erstellen, die dem JSON-Format entspricht
-
-            String json = "[{\"id\":\"5f550865-e9de-49ec-bdad-ca3e541cee6b\",\"word\":\"Test\",\"foreignWord\":\"23\",\"learned\":false},{\"id\":\"b8d38377-4624-4767-83d8-593f8906d706\",\"word\":\"nue\",\"foreignWord\":\"fe\",\"learned\":false}]";
-
-            ObjectMapper mapper = new ObjectMapper();
-            
-            // Sie müssen eine Klasse erstellen, die dem JSON-Format entspricht
-            
-            Word[] words = mapper.readValue(json, Word[].class);
-            
-            for (Word w : words) {
-              System.out.println(w.id + " " + w.word + " " + w.foreignWord + " " + w.learned);
-            }
-
-			// String content = FileAccess.readFile("data.txt");
+   
+			String content = FileAccess.readFile("data.txt");
             // Gson gson = new Gson();
-            // class Card {
-            //     String id;
-            //     String word;
-            //     String foreignWord;
-            //     boolean learned;
-            //   }
-              
-            // Card[] cards = gson.fromJson(content, Card[].class);
-            // System.out.println(cards[0].id);
-            // // System.out.println("convertedData " + content);
-            // // for (Card w : cards) {
-            // //     System.out.println(w.id + " " + w.word + " " + w.foreignWord + " " + w.learned);
-            // //   }
+            ObjectMapper mapper = new ObjectMapper();
+            JSONCard[] cards = mapper.readValue(content, JSONCard[].class);
+
+            for (JSONCard card : cards) {
+                Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned);
+                englishlist.add(newCard);
+              }
 
 		} catch (Exception e) {
             System.out.println(e.getMessage());
@@ -345,7 +326,7 @@ public class Controller implements Initializable {
 	}
 }
 
-class Word {
+class JSONCard {
     String id;
     String word;
     String foreignWord;

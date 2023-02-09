@@ -1,0 +1,1 @@
+[{"id":"adc257fb-233d-4b6b-8271-d07be1464e41", "word":"Test", "foreignWord":"2342", "learned":false}, {"id":"df8cf9a0-de96-437f-9f01-d1f0aa81a448", "word":"Hello", "foreignWord":"f2fwef", "learned":false}]
