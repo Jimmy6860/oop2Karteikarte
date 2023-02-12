@@ -1,1 +1,1 @@
-[{"id":"ccd90be0-4be7-48c4-80a2-5df1389b70fd", "word":"sdvsdv", "foreignWord":"svsdvsd", "learned":false, "language":"null"}]
+[{"id":"9b0b1d88-7b29-4f28-b576-07b0e84f43d9", "word":"Test", "foreignWord":"Test", "learned":false, "language":"Englisch"}, {"id":"89034470-340f-4cb8-9d6a-86c60fd94bbd", "word":"Neu", "foreignWord":"Neu", "learned":false, "language":"Englisch"}]

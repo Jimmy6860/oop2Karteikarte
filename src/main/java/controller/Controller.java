@@ -49,6 +49,8 @@ public class Controller implements Initializable {
     @FXML
     private Label systemLabelLeft;
     @FXML
+    private Label systemLabelLearn;
+    @FXML
     private Text learnSectionTitle;
 
 
@@ -248,10 +250,16 @@ public class Controller implements Initializable {
     }
 
     public void showForeignWord() {
-        lnForeignTxt.setText(getCurrentCard().getForeignWord());
+        String foreignWord = getCurrentCard().getForeignWord();
+        if(lnForeignTxt.getText().equals(foreignWord)) {
+            systemLabelLearn.setText("Richtig: " + foreignWord);
+        } else {
+            systemLabelLearn.setText("Falsch: " + foreignWord);
+        } 
     }
 
     public void nextCard() {
+        systemLabelLearn.setText("");
         if(currentIndex < (currentList.size() - 1)) {
             currentIndex++;
             System.out.println("currentIndex: " + currentIndex);
@@ -273,10 +281,10 @@ public class Controller implements Initializable {
                 resetLearningSession();
             }
         }
-
     }
 
     public void previousCard() {
+        systemLabelLearn.setText("");
         if(currentIndex != 0) {
             currentIndex--;
             startLearning();
@@ -322,7 +330,7 @@ public class Controller implements Initializable {
             JSONCard[] cards = mapper.readValue(content, JSONCard[].class);
 
             for (JSONCard card : cards) {
-                Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned, currentLanguage);
+                Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned, card.language);
 
                 if(card.getLanguage().equals("Englisch")) {
                     englishlist.add(newCard);
