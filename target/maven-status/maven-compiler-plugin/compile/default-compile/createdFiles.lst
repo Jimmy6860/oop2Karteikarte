@@ -1,4 +1,5 @@
 model/Card.class
+controller/Controller$1.class
 controller/JSONCard.class
 Service/FileAccess.class
 model/CardsStack.class

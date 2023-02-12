@@ -3,6 +3,8 @@ package controller;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -99,9 +101,19 @@ public class Controller implements Initializable {
 
     private void setTableData() {
         cardList = getInitialTableData();
+        //Sort list alphabetically
+        sortAlphaFunction(cardList);
         // Set all card values to the table
         cardTable.setItems(cardList);
         cardColumn.setCellValueFactory(cellData -> cellData.getValue().wordProperty());
+    }
+
+    private void sortAlphaFunction(List<Card> cards) {
+        Collections.sort(cards, new Comparator<Card>() {
+            public int compare(Card v1, Card v2) {
+                return v1.getWord().compareTo(v2.getWord());
+            }
+        });
     }
 
     public void getLanguages(ActionEvent event) {
