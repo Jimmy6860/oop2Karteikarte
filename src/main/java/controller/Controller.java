@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import Service.FileAccess;
 import enumeration.Language;
@@ -35,17 +30,6 @@ import model.Card;
 import model.CardsStack;
 
 public class Controller implements Initializable {
-    private static ObservableList<Card> cardList;
-    private List<Card> englishlist = new ArrayList<>();
-    private List<Card> frenchlist = new ArrayList<>();
-    private List<Card> italianlist = new ArrayList<>();
-    private CardsStack englishStack = new CardsStack("1", "EnglishStack", englishlist, Language.English);
-    private CardsStack frenchStack = new CardsStack("2", "FrenchStack", frenchlist, Language.French);
-    private CardsStack italianStack = new CardsStack("3", "ItalianStack", italianlist, Language.Italian);
-    private String[] languages= {"Englisch", "Französich", "Italienisch" };
-    private List<Card> currentList = englishStack.getCards();
-    private Integer currentIndex = 0;
-
     @FXML
     private TextField germanTxtField;
     @FXML
@@ -67,6 +51,22 @@ public class Controller implements Initializable {
     @FXML
     private Text learnSectionTitle;
 
+
+    private static ObservableList<Card> cardList;
+    private List<Card> englishlist = new ArrayList<>();
+    private List<Card> frenchlist = new ArrayList<>();
+    private List<Card> italianlist = new ArrayList<>();
+    private List<Card> spanishList = new ArrayList<>();
+    private CardsStack englishStack = new CardsStack("1", "EnglishStack", englishlist, Language.Englisch);
+    private CardsStack frenchStack = new CardsStack("2", "FrenchStack", frenchlist, Language.Französisch);
+    private CardsStack italianStack = new CardsStack("3", "ItalianStack", italianlist, Language.Italienisch);
+    private CardsStack spanishStack = new CardsStack("4", "SpnishStack", spanishList, Language.Spanisch);
+    private Language[] languages = Language.values();
+    private List<Card> currentList = englishStack.getCards();
+    private Integer currentIndex = 0;
+    String currentLanguage;
+    
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         loadFile();
@@ -78,9 +78,13 @@ public class Controller implements Initializable {
         // Event listener, check which card the user select and set the card details values
         cardTable.getSelectionModel().selectedItemProperty().addListener((observale, oldvalue, newValue) -> showCardDetails(newValue));
         
-        choiceBoxLanguage.getItems().addAll(languages);
+        for(Language language: languages) {
+            choiceBoxLanguage.getItems().add(language.name());
+        }
+       
         choiceBoxLanguage.setOnAction(this::getLanguages);
         learnSectionTitle.setText("Englisch");
+        currentLanguage = choiceBoxLanguage.getValue();
     }
 
     // set initialize tasks data
@@ -99,17 +103,20 @@ public class Controller implements Initializable {
     }
 
     public void getLanguages(ActionEvent event) {
-        String currentLanguage = choiceBoxLanguage.getValue();
+        currentLanguage = choiceBoxLanguage.getValue();
 
         switch (currentLanguage) {
             case "Englisch":
                 currentList = englishStack.getCards();
                 break;
-            case "Französich":
+            case "Französisch":
                 currentList = frenchStack.getCards();
                 break;
             case "Italienisch":
                 currentList = italianStack.getCards();
+                break;
+            case "Spanisch":
+                currentList = spanishStack.getCards();
                 break;
             default:
                 currentList = englishStack.getCards();
@@ -165,7 +172,6 @@ public class Controller implements Initializable {
 
     @FXML
     public void addNewCard() {
-        
         if(isInputValid()){
             Card selectedTask = cardTable.getSelectionModel().getSelectedItem();
             if(selectedTask != null) {
@@ -173,9 +179,9 @@ public class Controller implements Initializable {
                 selectedTask.setForeignWord(foreignTxtField.getText());
                 setSystemLabelRight("Karteikarte angepasst");
             } else {
-                Card newCard = new Card("", germanTxtField.getText(), foreignTxtField.getText(), false);
+                Card newCard = new Card("", germanTxtField.getText(), foreignTxtField.getText(), false, currentLanguage);
                 System.out.println(newCard);
-                System.out.println(newCard.getId());
+                System.out.println(Language.valueOf(currentLanguage));
                 setSystemLabelRight("Karteikarte gespeichert");
                 cardTable.getItems().add(newCard);
                 resetCardTextField();
@@ -288,8 +294,13 @@ public class Controller implements Initializable {
     *************************/
 
     public void saveFile() {
+        List<Card> allStack = englishStack.getCards();
+        allStack.addAll(frenchStack.getCards());
+        allStack.addAll(italianStack.getCards());
+        allStack.addAll(spanishStack.getCards());
+
         try {
-            FileAccess.saveFile("data.txt", englishStack.getCards().toString());
+            FileAccess.saveFile("data.txt", allStack.toString());
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Exception: " + e.getClass().getName());
@@ -302,15 +313,22 @@ public class Controller implements Initializable {
     @FXML
 	private void loadFile() {
 		try {
-   
 			String content = FileAccess.readFile("data.txt");
-            // Gson gson = new Gson();
             ObjectMapper mapper = new ObjectMapper();
             JSONCard[] cards = mapper.readValue(content, JSONCard[].class);
 
             for (JSONCard card : cards) {
-                Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned);
-                englishlist.add(newCard);
+                Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned, currentLanguage);
+                
+                if(card.getLanguage().equals("Englisch")) {
+                    englishlist.add(newCard);
+                } else if(card.getLanguage().equals("Französisch")) {
+                    frenchlist.add(newCard);
+                }  else if(card.getLanguage().equals("Italienisch")) {
+                    italianlist.add(newCard);
+                } else if(card.getLanguage().equals("Spanisch")) {
+                    spanishList.add(newCard);
+                }
               }
 
 		} catch (Exception e) {
@@ -331,6 +349,7 @@ class JSONCard {
     String word;
     String foreignWord;
     boolean learned;
+    String language;
 
     public String getId() {
         return this.id;
@@ -366,5 +385,13 @@ class JSONCard {
 
     public void setLearned(boolean learned) {
         this.learned = learned;
+    }
+
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public void setLanguage(String langugage) {
+        this.language = langugage;
     }
   }

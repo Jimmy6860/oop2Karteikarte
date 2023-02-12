@@ -5,6 +5,7 @@ import javafx.beans.property.StringProperty;
 
 import java.util.UUID;
 
+import enumeration.Language;
 import interfaces.Deck;
 
 public class Card implements Deck {
@@ -15,16 +16,18 @@ public class Card implements Deck {
     private StringProperty word;
 	private StringProperty foreignWord;
 	private boolean learned;
+    private String language;
 
     public Card() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
-    public Card(String id, String word, String foreignWord, Boolean learned) {
+    public Card(String id, String word, String foreignWord, Boolean learned, String language) {
         this.id = id.length() == 0 ? uuidAsString : id ;
         this.word = new SimpleStringProperty(word);
         this.foreignWord = new SimpleStringProperty(foreignWord);
         this.learned = learned;
+        this.language = language;
     }
 
     public String getId() {
@@ -74,6 +77,15 @@ public class Card implements Deck {
     //     return learned;
     // }
 
+    //Langauge
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -81,6 +93,7 @@ public class Card implements Deck {
         ", \"word\":" + "\"" + getWord() + "\"" +
         ", \"foreignWord\":" + "\"" + getForeignWord() + "\"" +
         ", \"learned\":" + getLearned() +
+        ", \"language\":" + "\"" + getLanguage() + "\"" +
         "}";
     }
 
