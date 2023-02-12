@@ -301,6 +301,10 @@ public class Controller implements Initializable {
 
         try {
             FileAccess.saveFile("data.txt", allStack.toString());
+            Alert informationAlert = new Alert(AlertType.INFORMATION);
+            informationAlert.setTitle("Karteikarte");
+            informationAlert.setContentText("Daten wurde erfolgreich gespeichert");
+            informationAlert.showAndWait();
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Exception: " + e.getClass().getName());
@@ -319,7 +323,7 @@ public class Controller implements Initializable {
 
             for (JSONCard card : cards) {
                 Card newCard = new Card(card.id, card.word, card.foreignWord, card.learned, currentLanguage);
-                
+
                 if(card.getLanguage().equals("Englisch")) {
                     englishlist.add(newCard);
                 } else if(card.getLanguage().equals("Französisch")) {
