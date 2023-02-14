@@ -192,6 +192,7 @@ public class Controller implements Initializable {
                 selectedTask.setWord(germanTxtField.getText());
                 selectedTask.setForeignWord(foreignTxtField.getText());
                 setSystemLabelRight("Karteikarte angepasst");
+                resetCardTextField();
             } else {
                 Card newCard = new Card("", germanTxtField.getText(), foreignTxtField.getText(), false, currentLanguage);
                 System.out.println(newCard);
@@ -201,6 +202,7 @@ public class Controller implements Initializable {
                 resetCardTextField();
             }
         }
+
     }
 
     @FXML
