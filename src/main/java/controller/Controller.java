@@ -8,9 +8,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Service.FileAccess;
+import Service.Logging;
 import enumeration.Language;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,7 +59,7 @@ public class Controller implements Initializable {
     @FXML
     private Text learnSectionTitle;
 
-
+    private static final Logger LOGGER =  Logger.getLogger(Logging.class.getName());
     private static ObservableList<Card> cardList;
     private List<Card> englishlist = new ArrayList<>();
     private List<Card> frenchlist = new ArrayList<>();
@@ -70,6 +74,13 @@ public class Controller implements Initializable {
     private Integer currentIndex = 0;
     String currentLanguage;
     
+    public void writeLogs(String msg) {
+        LOGGER.finest("FINEST");
+        LOGGER.fine("FINE");
+        LOGGER.info("ERROR");
+        LOGGER.severe("Meldung: " + msg);
+        LOGGER.log(Level.WARNING, "Logs:" + msg, "neue");
+    }
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -333,6 +344,7 @@ public class Controller implements Initializable {
 			alert.setHeaderText(null);
 			alert.setContentText("Error-Message: " + e.getMessage());
 			alert.showAndWait();
+            writeLogs(e.getMessage());
 		}
     }
 
@@ -364,7 +376,7 @@ public class Controller implements Initializable {
 			alert.setHeaderText(null);
 			alert.setContentText("Error-Message: " + e.getMessage());
 			alert.showAndWait();
-            
+            writeLogs(e.getMessage());
 		}
 		
 	}

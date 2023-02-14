@@ -1,10 +1,11 @@
 model/Card.class
-controller/Controller$1.class
 controller/JSONCard.class
-Service/FileAccess.class
-model/CardsStack.class
 model/FileInfo.class
 App.class
-enumeration/Language.class
+Service/Logging.class
 interfaces/Deck.class
+controller/Controller$1.class
+Service/FileAccess.class
+model/CardsStack.class
+enumeration/Language.class
 controller/Controller.class
