@@ -263,6 +263,7 @@
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#previousCard" prefHeight="26.0" prefWidth="108.0" text="Zurück" GridPane.rowIndex="1" />
                                           <Button mnemonicParsing="false" onAction="#nextCard" prefHeight="26.0" prefWidth="106.0" text="Weiter" />
+                                          <Button mnemonicParsing="false" onAction="#resetLearningSession" prefHeight="26.0" prefWidth="108.0" text="Abbrechen" GridPane.rowIndex="3" />
                                        </children>
                                        <padding>
                                           <Insets left="16.0" right="16.0" />

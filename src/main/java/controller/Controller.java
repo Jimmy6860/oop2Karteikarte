@@ -72,6 +72,7 @@ public class Controller implements Initializable {
     private Language[] languages = Language.values();
     private List<Card> currentList = englishStack.getCards();
     private Integer currentIndex = 0;
+    private Boolean learning = false;
     String currentLanguage;
     
     public void writeLogs(String msg) {
@@ -266,44 +267,45 @@ public class Controller implements Initializable {
     }
 
     public void startLearning() {
-        
         lnGermanTxt.setText(getCurrentCard().getWord());
         lnForeignTxt.setText("");
-        for (Card card : cardList) {
-            System.out.println(card.toString());
-        }
+        learning = true;
     }
 
     public void showForeignWord() {
-        String foreignWord = getCurrentCard().getForeignWord();
-        if(lnForeignTxt.getText().equals(foreignWord)) {
-            systemLabelLearn.setText("Richtig: " + foreignWord);
-        } else {
-            systemLabelLearn.setText("Falsch: " + foreignWord);
-        } 
+        if(learning) {
+            String foreignWord = getCurrentCard().getForeignWord();
+            if(lnForeignTxt.getText().equals(foreignWord)) {
+                systemLabelLearn.setText("Richtig: " + foreignWord);
+            } else {
+                systemLabelLearn.setText("Falsch: " + foreignWord);
+            } 
+        }
     }
 
     public void nextCard() {
-        systemLabelLearn.setText("");
-        if(currentIndex < (currentList.size() - 1)) {
-            currentIndex++;
-            System.out.println("currentIndex: " + currentIndex);
-            System.out.println("currentList" + currentList.size());
-            
-            startLearning();
-        } else {
-            Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
-            confirmationAlert.setTitle("Ende");
-            confirmationAlert.setContentText("Möchten Sie nochmals lernen?");
-            ButtonType okButton = new ButtonType("JA");
-            ButtonType noButton = new ButtonType("NEIN");
-            confirmationAlert.getButtonTypes().setAll(okButton, noButton);
-            Optional<ButtonType> result = confirmationAlert.showAndWait();
-            if(result.get() == okButton) {
-                resetLearningSession();
+        if(learning) {
+            systemLabelLearn.setText("");
+            if(currentIndex < (currentList.size() - 1)) {
+                currentIndex++;
+                System.out.println("currentIndex: " + currentIndex);
+                System.out.println("currentList" + currentList.size());
+                
                 startLearning();
-            } else if(result.get() == noButton) {
-                resetLearningSession();
+            } else {
+                Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("Ende");
+                confirmationAlert.setContentText("Möchten Sie nochmals lernen?");
+                ButtonType okButton = new ButtonType("JA");
+                ButtonType noButton = new ButtonType("NEIN");
+                confirmationAlert.getButtonTypes().setAll(okButton, noButton);
+                Optional<ButtonType> result = confirmationAlert.showAndWait();
+                if(result.get() == okButton) {
+                    resetLearningSession();
+                    startLearning();
+                } else if(result.get() == noButton) {
+                    resetLearningSession();
+                }
             }
         }
     }
@@ -320,6 +322,7 @@ public class Controller implements Initializable {
         lnGermanTxt.setText("");
         lnForeignTxt.setText("");
         currentIndex = 0;
+        learning = false;
     }
 
     /************************
