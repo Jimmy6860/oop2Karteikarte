@@ -3,7 +3,6 @@ package model;
 import java.util.List;
 
 import interfaces.Deck;
-import javafx.beans.property.StringProperty;
 import enumeration.*;
 
 public class CardsStack implements Deck {
