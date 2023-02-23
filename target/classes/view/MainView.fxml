@@ -26,9 +26,9 @@
    <children>
       <BorderPane prefHeight="428.0" prefWidth="671.0">
          <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="Übersicht">
+                <Tab fx:id="tabOverview" text="Übersicht">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="678.0">
                            <children>

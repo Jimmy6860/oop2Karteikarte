@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 
 import java.util.UUID;
 
-import enumeration.Language;
 import interfaces.Deck;
 
 public class Card implements Deck {

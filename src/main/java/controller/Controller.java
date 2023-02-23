@@ -27,6 +27,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,6 +60,10 @@ public class Controller implements Initializable {
     private Label systemLabelLearn;
     @FXML
     private Text learnSectionTitle;
+    @FXML
+    TabPane tabPane;
+    @FXML
+    Tab tabOverview;
 
     private static final Logger LOGGER =  Logger.getLogger(Logging.class.getName());
     private static ObservableList<Card> cardList;
@@ -203,12 +209,14 @@ public class Controller implements Initializable {
             if(selectedTask != null) {
                 selectedTask.setWord(germanTxtField.getText());
                 selectedTask.setForeignWord(foreignTxtField.getText());
+                cardTable.getSelectionModel().clearSelection();
                 setSystemLabelRight("Karteikarte angepasst");
                 resetCardTextField();
             } else {
                 Card newCard = new Card("", germanTxtField.getText(), foreignTxtField.getText(), false, currentLanguage);
                 System.out.println(newCard);
                 System.out.println(Language.valueOf(currentLanguage));
+                cardTable.getSelectionModel().clearSelection();
                 setSystemLabelRight("Karteikarte gespeichert");
                 cardTable.getItems().add(newCard);
                 resetCardTextField();
@@ -234,12 +242,14 @@ public class Controller implements Initializable {
                 clearCardDetails();
 
                 systemLabelLeft.setText("Karteikarte gelöscht");
+                cardTable.getSelectionModel().clearSelection();
                 Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> systemLabelLeft.setText("")));
                 timeline.play();
             } else if (result.get() == noButton) {
                 confirmationAlert.close();
+                cardTable.getSelectionModel().clearSelection();
             }
         } else {
             Alert alert = new Alert(AlertType.WARNING);
