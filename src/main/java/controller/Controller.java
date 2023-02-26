@@ -33,6 +33,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Card;
 import model.CardsStack;
@@ -286,8 +287,10 @@ public class Controller implements Initializable {
         if(learning) {
             String foreignWord = getCurrentCard().getForeignWord();
             if(lnForeignTxt.getText().equals(foreignWord)) {
+                systemLabelLearn.setTextFill(Color.GREEN);
                 systemLabelLearn.setText("Richtig: " + foreignWord);
             } else {
+                systemLabelLearn.setTextFill(Color.RED);
                 systemLabelLearn.setText("Falsch: " + foreignWord);
             } 
         }
