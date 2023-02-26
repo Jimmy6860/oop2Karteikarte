@@ -346,7 +346,7 @@ public class Controller implements Initializable {
         allStack.addAll(spanishStack.getCards());
 
         try {
-            FileAccess.saveFile("data.txt", allStack.toString());
+            FileAccess.saveFile("data.json", allStack.toString());
             Alert informationAlert = new Alert(AlertType.INFORMATION);
             informationAlert.setTitle("Karteikarte");
             informationAlert.setContentText("Daten wurde erfolgreich gespeichert");
@@ -364,7 +364,7 @@ public class Controller implements Initializable {
     @FXML
 	private void loadFile() {
 		try {
-			String content = FileAccess.readFile("data.txt");
+			String content = FileAccess.readFile("data.json");
             ObjectMapper mapper = new ObjectMapper();
             JSONCard[] cards = mapper.readValue(content, JSONCard[].class);
 
